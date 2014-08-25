@@ -37,6 +37,17 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 
 	wndMain.ShowWindow(nCmdShow);
 
+
+		CBrowserView* pView = new CBrowserView;
+		RECT rcDefault = {100,100,100,100};
+
+		pView->Create(wndMain.m_hWnd,rcDefault , _T("http://www.baidu.com"), WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VSCROLL | WS_HSCROLL);
+		if(pView->IsWindow()){
+			pView->ShowWindow(nCmdShow);
+		}
+
+
+
 	int nRet = theLoop.Run();
 
 	_Module.RemoveMessageLoop();

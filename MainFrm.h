@@ -677,8 +677,8 @@ public:
 
 	LRESULT OnShowWindows(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 	{
-		CWindowsDlg dlg(&m_view);
-		dlg.DoModal(m_hWnd);
+		//CWindowsDlg dlg(&m_view);
+		//dlg.DoModal(m_hWnd);
 
 		return 0;
 	}
