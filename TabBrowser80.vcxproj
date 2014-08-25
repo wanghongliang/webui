@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -130,6 +131,7 @@
     <ClInclude Include="BrowserView.h" />
     <ClInclude Include="CustomTabView.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MainWindow.h" />
     <ClInclude Include="OpenDlg.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />

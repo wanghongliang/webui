@@ -19,6 +19,8 @@
 #include "WindowsDlg.h"
 #include "AboutDlg.h"
 #include "MainFrm.h"
+#include "MainWindow.h"
+
 
 CAppModule _Module;
 
@@ -27,24 +29,34 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 	CMessageLoop theLoop;
 	_Module.AddMessageLoop(&theLoop);
 
-	CMainFrame wndMain;
+	//CMainFrame wndMain;
 
-	if(wndMain.CreateEx() == NULL)
+	//if(wndMain.CreateEx() == NULL)
+	//{
+	//	ATLTRACE(_T("Main window creation failed!\n"));
+	//	return 0;
+	//}
+
+	//wndMain.ShowWindow(nCmdShow);
+
+
+
+	CMainWindow mainWindow;
+	
+	if(mainWindow.Create(NULL) == NULL)
 	{
-		ATLTRACE(_T("Main window creation failed!\n"));
+		ATLTRACE(_T(" CMainWindow creation failed!\n"));
 		return 0;
 	}
+	mainWindow.ShowWindow(nCmdShow);
 
-	wndMain.ShowWindow(nCmdShow);
+		//CBrowserView* pView = new CBrowserView;
+		//RECT rcDefault = {100,100,100,100};
 
-
-		CBrowserView* pView = new CBrowserView;
-		RECT rcDefault = {100,100,100,100};
-
-		pView->Create(wndMain.m_hWnd,rcDefault , _T("http://www.baidu.com"), WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VSCROLL | WS_HSCROLL);
-		if(pView->IsWindow()){
-			pView->ShowWindow(nCmdShow);
-		}
+		//pView->Create(wndMain.m_hWnd,rcDefault , _T("http://www.baidu.com"), WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VSCROLL | WS_HSCROLL);
+		//if(pView->IsWindow()){
+		//	pView->ShowWindow(nCmdShow);
+		//}
 
 
 
