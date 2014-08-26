@@ -59,8 +59,8 @@ public:
 		//MESSAGE_HANDLER( WM_WINDOWPOSCHANGED, OnWindowPosChanged)
 
 		//MESSAGE_HANDLER( WM_NCPAINT, OnNcPaint )
-		//MESSAGE_HANDLER( WM_ERASEBKGND, OnEraseBkgnd ) 
-		//MESSAGE_HANDLER( WM_PAINT, OnPaint )  
+		MESSAGE_HANDLER( WM_ERASEBKGND, OnEraseBkgnd ) 
+		MESSAGE_HANDLER( WM_PAINT, OnPaint )  
 
 		//MESSAGE_HANDLER(WM_GETMINMAXINFO, OnGetMinMaxInfo)
      END_MSG_MAP()
@@ -86,7 +86,7 @@ public:
 	//Çå³ý±³¾°ÏìÓ¦
 	LRESULT OnEraseBkgnd(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{ 
-		 
+		 bHandled = false;
 
 		return TRUE;
 

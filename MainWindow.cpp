@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "MainWindow.h"
- 
+
+
 
 LRESULT CMainWindow::OnCreate(
     UINT uMsg,
@@ -18,7 +19,7 @@ LRESULT CMainWindow::OnCreate(
 	//SWP_DRAWFRAME 绘制窗口程序的边框。
 
 	inited = false;
-	ModifyStyle( WS_CAPTION | WS_BORDER | WS_THICKFRAME,   WS_OVERLAPPED |  WS_SYSMENU |WS_MINIMIZEBOX|WS_MAXIMIZEBOX|WS_CLIPCHILDREN|WS_CLIPSIBLINGS , SWP_DRAWFRAME);
+	ModifyStyle( WS_CAPTION | WS_BORDER ,   WS_OVERLAPPED |  WS_SYSMENU |WS_MINIMIZEBOX|WS_MAXIMIZEBOX|WS_CLIPCHILDREN|WS_CLIPSIBLINGS , SWP_DRAWFRAME);
 
 
 	// register object for message filtering and idle updates
@@ -40,7 +41,8 @@ LRESULT CMainWindow::OnCreate(
 		ATLTRACE( _T(" broser view create windows error!") );
 		inited = true;
 	}
- 
+
+	
 
     bHandled = TRUE;
     return 0;

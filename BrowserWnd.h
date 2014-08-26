@@ -205,7 +205,26 @@ public:
 	//清除背景响应
 	LRESULT OnEraseBkgnd(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
- 
+
+		//在OnEraseBkgnd写一段，确定WEBBROWSER所在的区域，然后将这个区域InvalidateRgn掉，就OK了，我这是这么干的。
+		//CPaintDC dc(this);
+		//CRect rect;
+		//GetClientRect(&rect);
+		//CRgn rgnWeb,rgnUpdate;
+		//if ( !rect.EqualRect(&rcPreSize) )//rcPreSize,CRect类型的窗口成员，用于记录窗口大小。如果窗口没改变大小将不挖坑
+		//{    
+		////PS：计算无效区域
+		//CRect rectAll;
+		//GetWindowRect(&rectAll);
+		//rgnUpdate.CreateRectRgn(/*写上窗口区域相关的数据*/);
+		//rgnWeb.CreateRectRgn(/*WEBBROWSER区域的数据*/);
+		//rgnUpdate.CombineRgn(&rgnUpdate,&rgnWeb,RGN_DIFF);
+		//InvalidateRgn(&rgnUpdate,FALSE);
+		//}
+		//rgnWeb.DeleteObject();
+		//rgnUpdate.DeleteObject();
+		//GetClientRect(&rcPreSize);
+		//     
 		return TRUE;
 
 	}

@@ -20,7 +20,7 @@
 #include "AboutDlg.h"
 #include "MainFrm.h"
 #include "MainWindow.h"
-
+#include "WndShadow.h"
 
 CAppModule _Module;
 
@@ -31,23 +31,23 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 
 
 
-	//CMainFrame wndMain; 
-	//if(wndMain.CreateEx() == NULL)
-	//{
-	//	ATLTRACE(_T("Main window creation failed!\n"));
-	//	return 0;
-	//} 
-	//wndMain.ShowWindow(nCmdShow);
-
-
-
-	CMainWindow mainWindow;
-	if(mainWindow.Create(NULL) == NULL)
+	CMainFrame wndMain; 
+	if(wndMain.CreateEx() == NULL)
 	{
-		ATLTRACE(_T(" CMainWindow creation failed!\n"));
+		ATLTRACE(_T("Main window creation failed!\n"));
 		return 0;
-	}
-	mainWindow.ShowWindow(nCmdShow);
+	} 
+	wndMain.ShowWindow(nCmdShow);
+
+
+
+	//CMainWindow mainWindow;
+	//if(mainWindow.Create(NULL) == NULL)
+	//{
+	//	ATLTRACE(_T(" CMainWindow creation failed!\n"));
+	//	return 0;
+	//}
+	//mainWindow.ShowWindow(nCmdShow);
 
 
 
@@ -81,6 +81,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 	ATLASSERT(SUCCEEDED(hRes));
 
 	AtlAxWinInit();
+
+	//CWndShadow::Initialize(hInstance );   
 
 	int nRet = Run(lpstrCmdLine, nCmdShow);
 
