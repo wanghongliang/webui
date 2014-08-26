@@ -27,4 +27,5 @@
 *.pdb
 *.ilk
 
-/Debug80
+/Debug80/
+*.suo
