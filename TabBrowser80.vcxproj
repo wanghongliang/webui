@@ -129,10 +129,12 @@
     <ClInclude Include="AboutDlg.h" />
     <ClInclude Include="AddressCombo.h" />
     <ClInclude Include="BrowserView.h" />
+    <ClInclude Include="BrowserWnd.h" />
     <ClInclude Include="CustomTabView.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="OpenDlg.h" />
+    <ClInclude Include="PaintBkgnd.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="WindowsDlg.h" />

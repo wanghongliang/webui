@@ -5,6 +5,7 @@
 #pragma once
 
 #include <exdispid.h>
+#include "BrowserWnd.h"
 
 const int _nDispatchID = 1;
 
@@ -17,7 +18,7 @@ class CBrowserView : public CWindowImpl<CBrowserView, CAxWindow>,
 		public IDispEventSimpleImpl<_nDispatchID, CBrowserView, &DIID_DWebBrowserEvents2>
 {
 public:
-	DECLARE_WND_SUPERCLASS(_T("TabBrowser_TabPageWindow"), CAxWindow::GetWndClassName())
+	DECLARE_WND_SUPERCLASS(_T("BrowserView"), CAxWindow::GetWndClassName())
 
 	// IDispatch events function info
 	static _ATL_FUNC_INFO DocumentComplete2_Info;
@@ -27,10 +28,11 @@ public:
 
 	bool m_bCanGoBack;
 	bool m_bCanGoForward;
-
+	BrowserWnd	m_IEWnd;				//
 
 	CBrowserView() : m_bCanGoBack(false), m_bCanGoForward(false)
 	{
+
 	}
 
 	BOOL PreTranslateMessage(MSG* pMsg)
@@ -95,6 +97,15 @@ public:
 		USES_CONVERSION;
 		SendMessage(GetTopLevelWindow(), WM_BROWSERDOCUMENTCOMPLETE, (WPARAM)m_hWnd, (LPARAM)OLE2T(URL->bstrVal));
 
+		if (!m_IEWnd.m_hWnd ) {
+			HWND hwnd = GetLastChild(m_hWnd);
+			m_IEWnd.SubclassWindow(hwnd);
+			m_IEWnd.tWnd = m_hWnd;
+
+			//·ÀÖ¹½Å±¾´íÎóµ¯³ö¿ò
+			//SetHandler(	m_pWB2 );
+		} 
+
 		SetFocusToHTML();
 	}
 
@@ -123,6 +134,8 @@ public:
 		MESSAGE_HANDLER(WM_CREATE, OnCreate)
 		MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
 		MESSAGE_HANDLER(WM_SETFOCUS, OnSetFocus)
+
+		MESSAGE_HANDLER( WM_ERASEBKGND, OnEraseBkgnd ) 
 	END_MSG_MAP()
 
 	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/)
@@ -170,6 +183,29 @@ public:
 
 		return lRet;
 	}
+
+		//Çå³ý±³¾°ÏìÓ¦
+	LRESULT OnEraseBkgnd(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+	{ 
+		bHandled = false;
+
+		return TRUE;
+
+	}
+
+	HWND GetLastChild(HWND hwndParent)
+	{
+	   HWND hwnd = hwndParent;
+	   while (TRUE) {
+		  HWND hwndChild = ::GetWindow(hwnd, GW_CHILD);
+		  if (hwndChild==NULL)
+			 return hwnd;
+		  hwnd = hwndChild;
+	   }
+	   return NULL;
+	}
+
+
 };
 
 __declspec(selectany) _ATL_FUNC_INFO CBrowserView::DocumentComplete2_Info = { CC_STDCALL, VT_EMPTY, 2, { VT_DISPATCH, VT_BYREF | VT_VARIANT } };

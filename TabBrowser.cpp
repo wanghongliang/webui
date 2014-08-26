@@ -29,26 +29,27 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 	CMessageLoop theLoop;
 	_Module.AddMessageLoop(&theLoop);
 
-	//CMainFrame wndMain;
 
+
+	//CMainFrame wndMain; 
 	//if(wndMain.CreateEx() == NULL)
 	//{
 	//	ATLTRACE(_T("Main window creation failed!\n"));
 	//	return 0;
-	//}
-
+	//} 
 	//wndMain.ShowWindow(nCmdShow);
 
 
 
 	CMainWindow mainWindow;
-	
 	if(mainWindow.Create(NULL) == NULL)
 	{
 		ATLTRACE(_T(" CMainWindow creation failed!\n"));
 		return 0;
 	}
 	mainWindow.ShowWindow(nCmdShow);
+
+
 
 		//CBrowserView* pView = new CBrowserView;
 		//RECT rcDefault = {100,100,100,100};

@@ -26,3 +26,5 @@
 *.pch
 *.pdb
 *.ilk
+
+/Debug80

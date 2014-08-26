@@ -11,7 +11,14 @@
 #define _WIN32_IE	0x0501
 #define _RICHEDIT_VER	0x0100
 
-#define _WTL_USE_CSTRING
+//#define _WTL_USE_CSTRING
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_NON_CONFORMING_SWPRINTFS
+#define _ATL_USE_CSTRING_FLOAT
+#define _WTL_NO_CSTRING
+#define _WTL_NO_WTYPES
+
+
 
 #ifdef _VC80X
   // Support for VS2005 Express & SDK ATL
@@ -22,7 +29,35 @@
   #pragma warning(disable: 4068) // unknown pragma
 #endif // _VC80X
 
-#include <atlbase.h>
+
+#include <atlbase.h> 
+#include <atlstr.h>
+#include <atltypes.h>
+#include <atlapp.h>
+
+ 
+
+ 
+//获取应用程序数据目录时需要的头文件 CSIDL_LOCAL_APPDATA
+#include <shlobj.h> 
+#include <atlmisc.h>
+#include <string>
+#include <vector>
+#include <map>
+using namespace std;
+
+
+
+#ifndef TRACE
+#define TRACE ATLTRACE
+#endif
+
+
+
+
+
+
+
 
 #ifdef _VC80X
   // Support for VS2005 Express & SDK ATL
@@ -44,17 +79,20 @@
 
 extern CAppModule _Module;
 
-#if (_ATL_VER < 0x0700)
-  #pragma warning(disable: 4100) // unreferenced formal parameter
-  #pragma warning(disable: 4189) // local variable is initialized but not referenced
-#endif
-
+ 
 #include <atlcom.h>
 
-#if (_ATL_VER < 0x0700)
-  #pragma warning(default: 4100)
-  #pragma warning(default: 4189)
-#endif
+//#if (_ATL_VER < 0x0700)
+  //#pragma warning(default: 4100)
+  //#pragma warning(default: 4189)
+
+//禁止输出警告信息， 如：未引用的变量等信息
+#pragma warning(disable: 4100)
+#pragma warning(disable: 4189)
+#pragma warning(disable: 4290)
+
+
+//#endif
 
 #include <atlhost.h>
 #include <atlwin.h>

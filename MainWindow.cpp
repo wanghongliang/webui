@@ -14,6 +14,13 @@ LRESULT CMainWindow::OnCreate(
     //SetClassLongPtr(m_hWnd, GCLP_HICON, icon);
     //SetClassLongPtr(m_hWnd, GCLP_HICONSM, icon);
 
+
+	// register object for message filtering and idle updates
+	CMessageLoop* pLoop = _Module.GetMessageLoop();
+	ATLASSERT(pLoop != NULL);
+	pLoop->AddMessageFilter(this);
+	pLoop->AddIdleHandler(this);
+
 	RECT rc;
     GetClientRect(&rc);
 
@@ -21,8 +28,8 @@ LRESULT CMainWindow::OnCreate(
     //m_editor.Create(m_hWnd, rc, nullptr, style);
 
 
- 	CBrowserView* pView = new CBrowserView;	
-	pView->Create( m_hWnd, rc , _T("http://www.baidu.com"), WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VSCROLL | WS_HSCROLL);
+	pView = new CBrowserView;	
+	pView->Create( m_hWnd, rc , _T("http://www.hao123.com"), WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VSCROLL | WS_HSCROLL);
 	 
  
 
@@ -32,9 +39,18 @@ LRESULT CMainWindow::OnCreate(
 
 LRESULT CMainWindow::OnDestroy(UINT, WPARAM, LPARAM, BOOL& bHandled)
 {
+    
+    //bHandled = TRUE;
+
+
+	// unregister object for message filtering and idle updates
+	CMessageLoop* pLoop = _Module.GetMessageLoop();
+	ATLASSERT(pLoop != NULL);
+	pLoop->RemoveMessageFilter(this);
+	pLoop->RemoveIdleHandler(this);
+
     ::PostQuitMessage(0);
-    bHandled = TRUE;
-    return 0;
+    return 1;
 }
 
 
@@ -48,4 +64,15 @@ LRESULT CMainWindow::OnFileOpen(WORD, WORD, HWND, BOOL& bHandled)
 {
     bHandled = TRUE;
     return 0;
+}
+
+void CMainWindow::OnSize(WPARAM wParam, LPARAM lParam){
+	if (pView) { 
+		if (::IsWindow(pView->m_hWnd)) {
+			//::MoveWindow(pView->m_hWnd, 0, 0, LOWORD(lParam), HIWORD(lParam), FALSE);
+			::SetWindowPos( pView->m_hWnd,NULL, 0, 0,  LOWORD(lParam),  HIWORD(lParam), SWP_NOZORDER);
+		}
+	}
+
+
 }
