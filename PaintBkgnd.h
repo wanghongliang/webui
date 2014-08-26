@@ -47,22 +47,22 @@ public:
 
      BEGIN_MSG_MAP(CPaintBkgnd) 
 
-		MESSAGE_HANDLER( WM_SHOWWINDOW, OnShowWindow )
+		//MESSAGE_HANDLER( WM_SHOWWINDOW, OnShowWindow )
 
-		MESSAGE_HANDLER( WM_LBUTTONDOWN,  OnLButtonDown ) 
-		MESSAGE_HANDLER( WM_NCACTIVATE, OnNcActivate)
-		MESSAGE_HANDLER( WM_ACTIVATEAPP, OnActivateApp )  
-		MESSAGE_HANDLER( WM_MOVE, OnMove )		//移动消息处理
+		//MESSAGE_HANDLER( WM_LBUTTONDOWN,  OnLButtonDown ) 
+		//MESSAGE_HANDLER( WM_NCACTIVATE, OnNcActivate)
+		//MESSAGE_HANDLER( WM_ACTIVATEAPP, OnActivateApp )  
+		//MESSAGE_HANDLER( WM_MOVE, OnMove )		//移动消息处理
 		MESSAGE_HANDLER( WM_SIZE, OnSize )
 		//MESSAGE_HANDLER( WM_SYSCOMMAND, OnSysCommand)
 		
 		//MESSAGE_HANDLER( WM_WINDOWPOSCHANGED, OnWindowPosChanged)
 
 		//MESSAGE_HANDLER( WM_NCPAINT, OnNcPaint )
-		MESSAGE_HANDLER( WM_ERASEBKGND, OnEraseBkgnd ) 
+		//MESSAGE_HANDLER( WM_ERASEBKGND, OnEraseBkgnd ) 
 		//MESSAGE_HANDLER( WM_PAINT, OnPaint )  
 
-		MESSAGE_HANDLER(WM_GETMINMAXINFO, OnGetMinMaxInfo)
+		//MESSAGE_HANDLER(WM_GETMINMAXINFO, OnGetMinMaxInfo)
      END_MSG_MAP()
 public: 
 	//清除背景响应
@@ -93,7 +93,8 @@ public:
 	}
     LRESULT OnPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
      {
-		 return TRUE;
+		 bHandled = false;
+		 return ::DefWindowProc(static_cast<T*>(this)->m_hWnd, uMsg, wParam, lParam);
         //return ::DefWindowProc(static_cast<T*>(this)->m_hWnd, uMsg, wParam, lParam);
      } 
 	LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
@@ -162,8 +163,9 @@ public:
 
 	LRESULT OnMove(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{ 
-		 
-		return 0;
+		//int l =  LOWORD(lParam),  t= HIWORD(lParam);
+		//this->OnMove( wParam, lParam); 
+		return True;
 	}
 	LRESULT OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
@@ -234,6 +236,7 @@ public:
 	void Init(){ 
 	};
 	virtual void OnSize(WPARAM wParam, LPARAM lParam){};
+	virtual void OnMove(WPARAM wParam, LPARAM lParam){};
 	virtual void InitIE(){};
 	
 };

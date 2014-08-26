@@ -18,6 +18,7 @@ public:
 
     DECLARE_WND_CLASS(TEXT("Main Window"));
 
+	bool inited;
 	CBrowserView* pView;
 	// CMessageFilter
 	virtual BOOL PreTranslateMessage(MSG* pMsg)
@@ -50,6 +51,7 @@ private:
     LRESULT OnFileOpen(WORD, WORD, HWND, BOOL&);
 
 	void OnSize(WPARAM wParam, LPARAM lParam);
+	void OnMove(WPARAM wParam, LPARAM lParam);
     CIcon m_icon;
     CMenu m_menu; 
 };

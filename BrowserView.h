@@ -100,7 +100,7 @@ public:
 		if (!m_IEWnd.m_hWnd ) {
 			HWND hwnd = GetLastChild(m_hWnd);
 			m_IEWnd.SubclassWindow(hwnd);
-			m_IEWnd.tWnd = m_hWnd;
+			m_IEWnd.tWnd = GetParent();
 
 			//·ÀÖ¹½Å±¾´íÎóµ¯³ö¿ò
 			//SetHandler(	m_pWB2 );

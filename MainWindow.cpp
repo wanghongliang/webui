@@ -14,6 +14,12 @@ LRESULT CMainWindow::OnCreate(
     //SetClassLongPtr(m_hWnd, GCLP_HICON, icon);
     //SetClassLongPtr(m_hWnd, GCLP_HICONSM, icon);
 
+	//去掉对话框边框和加上最大化和最小化按钮
+	//SWP_DRAWFRAME 绘制窗口程序的边框。
+
+	inited = false;
+	ModifyStyle( WS_CAPTION | WS_BORDER | WS_THICKFRAME,   WS_OVERLAPPED |  WS_SYSMENU |WS_MINIMIZEBOX|WS_MAXIMIZEBOX|WS_CLIPCHILDREN|WS_CLIPSIBLINGS , SWP_DRAWFRAME);
+
 
 	// register object for message filtering and idle updates
 	CMessageLoop* pLoop = _Module.GetMessageLoop();
@@ -30,7 +36,10 @@ LRESULT CMainWindow::OnCreate(
 
 	pView = new CBrowserView;	
 	pView->Create( m_hWnd, rc , _T("http://www.hao123.com"), WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VSCROLL | WS_HSCROLL);
-	 
+	if(pView->IsWindow()){
+		ATLTRACE( _T(" broser view create windows error!") );
+		inited = true;
+	}
  
 
     bHandled = TRUE;
@@ -67,10 +76,21 @@ LRESULT CMainWindow::OnFileOpen(WORD, WORD, HWND, BOOL& bHandled)
 }
 
 void CMainWindow::OnSize(WPARAM wParam, LPARAM lParam){
+	if ( inited== true && pView ) { 
+		if (::IsWindow(pView->m_hWnd)) {
+			//::MoveWindow(pView->m_hWnd, 0, 0, LOWORD(lParam), HIWORD(lParam), FALSE);
+			::SetWindowPos( pView->m_hWnd,NULL, 0, 0,  LOWORD(lParam),  HIWORD(lParam), SWP_NOZORDER|SWP_NOMOVE);
+		}
+	}
+
+
+}
+
+void CMainWindow::OnMove(WPARAM wParam, LPARAM lParam){
 	if (pView) { 
 		if (::IsWindow(pView->m_hWnd)) {
 			//::MoveWindow(pView->m_hWnd, 0, 0, LOWORD(lParam), HIWORD(lParam), FALSE);
-			::SetWindowPos( pView->m_hWnd,NULL, 0, 0,  LOWORD(lParam),  HIWORD(lParam), SWP_NOZORDER);
+			::SetWindowPos( pView->m_hWnd,NULL, LOWORD(lParam),  HIWORD(lParam),  0, 0, SWP_NOZORDER|SWP_NOSIZE);
 		}
 	}
 

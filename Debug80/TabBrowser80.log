@@ -1,4 +1,4 @@
-﻿生成启动时间为 2014/8/26 14:03:13。
+﻿生成启动时间为 2014/8/26 16:25:05。
      1>项目“D:\develop\c++\webui\TabBrowser80.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug80\TabBrowser.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
@@ -33,4 +33,4 @@
 
 生成成功。
 
-已用时间 00:00:01.97
+已用时间 00:00:01.82
